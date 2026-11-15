@@ -43,6 +43,18 @@
   var metricHumidity = document.getElementById('metric-humidity');
   var metricWind = document.getElementById('metric-wind');
   var metricUV = document.getElementById('metric-uv');
+  var metricAqi = document.getElementById('metric-aqi');
+  var metricAqiDesc = document.getElementById('metric-aqi-desc');
+
+  // US EPA AQI index (1-6) → readable label
+  var AQI_LABELS = {
+    1: 'Good',
+    2: 'Moderate',
+    3: 'Unhealthy (sensitive)',
+    4: 'Unhealthy',
+    5: 'Very unhealthy',
+    6: 'Hazardous'
+  };
 
   var tabFormatted = document.getElementById('tab-formatted');
   var tabRaw = document.getElementById('tab-raw');
@@ -100,6 +112,16 @@
     metricHumidity.textContent = safe(cur.humidity, '—');
     metricWind.textContent = safe(cur.wind_kph, '—');
     metricUV.textContent = safe(cur.uv, '—');
+
+    var aq = cur.air_quality || {};
+    var epa = aq['us-epa-index'];
+    if (epa === null || epa === undefined || epa === '') {
+      metricAqi.textContent = '—';
+      metricAqiDesc.textContent = 'no data';
+    } else {
+      metricAqi.textContent = String(epa);
+      metricAqiDesc.textContent = AQI_LABELS[epa] || 'us-epa index';
+    }
 
     dashboard.hidden = false;
     dataCard.hidden = false;
