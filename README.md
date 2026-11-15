@@ -7,7 +7,7 @@ A weather dashboard with a credit-score-inspired experience. Search any city to 
 ## Features (MVP)
 
 - **City search** (P0) — retrieve current weather by city name
-- **Current weather dashboard** (P0) — city, temp °C, feels-like, condition + icon, humidity, wind kph, UV index, last-updated timestamp
+- **Current weather dashboard** (P0) — city, temp °C, feels-like, condition + icon, humidity, wind kph, UV index, **AQI (US EPA index with readable label)**, last-updated timestamp
 - **Popular cities** (P1) — one-tap lookup for Mumbai, Delhi, Bengaluru, London, New York, Tokyo, Dubai, Singapore
 - **Formatted / Raw JSON views** (P1) — inspect the exact API response, both reflecting the latest successful search
 - **Copy** (P1) — copy the displayed JSON with visible confirmation and graceful fallback
