@@ -24,7 +24,7 @@ module.exports = async (req, res) => {
     return res.status(500).json({ error: { message: 'Weather API key is not configured on the server.' } });
   }
 
-  const url = `${WEATHER_API_BASE}?key=${encodeURIComponent(apiKey)}&q=${encodeURIComponent(query)}&aqi=no`;
+  const url = `${WEATHER_API_BASE}?key=${encodeURIComponent(apiKey)}&q=${encodeURIComponent(query)}&aqi=yes`;
 
   try {
     const upstream = await fetch(url, { headers: { Accept: 'application/json' } });
