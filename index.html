@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SkyCred — check current weather for any city, as engaging as checking your credit score." />
+  <title>SkyCred — Weather Dashboard</title>
+  <link rel="preconnect" href="https://cdn.weatherapi.com" />
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛅</text></svg>" />
+</head>
+<body>
+  <div class="bg-glow bg-glow--1" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow--2" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="SkyCred home">
+      <span class="brand__mark" aria-hidden="true">⚡</span>
+      <span class="brand__name">Sky<span>Cred</span></span>
+    </a>
+    <p class="brand__tagline">Check the weather like you check your score.</p>
+  </header>
+
+  <main class="container">
+    <!-- Search -->
+    <section class="search-card" aria-labelledby="search-heading">
+      <h1 id="search-heading" class="visually-hidden">City search</h1>
+      <form id="search-form" class="search-form" autocomplete="off" novalidate>
+        <label for="city-input" class="visually-hidden">City name</label>
+        <input
+          id="city-input"
+          class="search-input"
+          type="text"
+          name="city"
+          placeholder="Enter a city… e.g. Mumbai"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <button id="search-btn" class="search-btn" type="submit">Get Weather</button>
+      </form>
+      <div class="popular" role="group" aria-label="Popular cities">
+        <span class="popular__label">Popular:</span>
+        <ul id="popular-list" class="popular__list"></ul>
+      </div>
+    </section>
+
+    <!-- Status (loading / errors) -->
+    <div id="status" class="status" role="status" aria-live="polite" hidden>
+      <span id="status-text" class="status__text"></span>
+    </div>
+
+    <!-- Dashboard -->
+    <section id="dashboard" class="dashboard" aria-labelledby="dashboard-heading" hidden>
+      <h2 id="dashboard-heading" class="visually-hidden">Current weather dashboard</h2>
+
+      <div class="hero">
+        <div class="dial" role="img" aria-label="Current temperature dial">
+          <div class="dial__ring" aria-hidden="true"><span class="dial__notch"></span></div>
+          <div class="dial__center">
+            <span id="dial-temp" class="dial__temp">--°</span>
+            <span class="dial__unit">celsius</span>
+          </div>
+        </div>
+        <div class="hero__meta">
+          <p id="hero-location" class="hero__location">—</p>
+          <p id="hero-country" class="hero__country">—</p>
+          <div class="hero__condition">
+            <img id="condition-icon" class="condition__icon" src="" alt="" width="64" height="64" />
+            <span id="condition-text" class="condition__text">—</span>
+          </div>
+          <p class="hero__feels">Feels like <strong id="feels-like">—</strong></p>
+          <p class="hero__updated">Last updated: <span id="last-updated">—</span> <span class="local-note">(local time)</span></p>
+        </div>
+      </div>
+
+      <ul class="metrics" aria-label="Weather indicators">
+        <li class="metric">
+          <span class="metric__label">Humidity</span>
+          <span id="metric-humidity" class="metric__value">—</span>
+          <span class="metric__unit">%</span>
+        </li>
+        <li class="metric">
+          <span class="metric__label">Wind Speed</span>
+          <span id="metric-wind" class="metric__value">—</span>
+          <span class="metric__unit">kph</span>
+        </li>
+        <li class="metric">
+          <span class="metric__label">UV Index</span>
+          <span id="metric-uv" class="metric__value">—</span>
+          <span class="metric__unit">uv</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Data views -->
+    <section id="data-card" class="data-card" aria-labelledby="data-heading" hidden>
+      <div class="data-card__head">
+        <h2 id="data-heading" class="data-card__title">Weather Data</h2>
+        <button id="copy-btn" class="copy-btn" type="button" aria-label="Copy displayed weather data">
+          <span id="copy-label">Copy JSON</span>
+        </button>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Weather data views">
+        <button id="tab-formatted" class="tab is-active" role="tab" aria-selected="true" aria-controls="json-panel" type="button">Formatted</button>
+        <button id="tab-raw" class="tab" role="tab" aria-selected="false" aria-controls="json-panel" type="button">Raw</button>
+      </div>
+      <div id="json-panel" class="json-panel" role="tabpanel" tabindex="0">
+        <pre id="json-view" class="json-view"><code class="json-code">—</code></pre>
+      </div>
+      <p class="data-card__hint">Both views reflect your latest successful search. Nothing is sent anywhere when you copy.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>SkyCred · Weather data by <a href="https://www.weatherapi.com/" rel="noopener noreferrer" target="_blank">WeatherAPI.com</a></p>
+  </footer>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>
