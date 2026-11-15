@@ -185,6 +185,7 @@
         }
 
         state.lastResponse = result.body;
+        setLoading(false);
         clearStatus();
         renderWeather(result.body);
         renderJson();
